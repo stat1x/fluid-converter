@@ -1,0 +1,28 @@
+{
+  "name": "website-build-utilities",
+  "description": "Website build utilities",
+  "main": "gulpfile.js",
+  "license": "MIT",
+  "moduleType": [],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "Vendors/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "animate.css": "~3.5.0",
+    "jquery": "~2.1.4",
+    "font-awesome": "fontawesome#~4.5.0",
+    "bootstrap": "https://github.com/twbs/bootstrap.git#v4-dev",
+    "tether": "~1.2.0"
+  },
+  "devDependencies": {},
+  "resolutions": {
+    "bootstrap": "~3.3.6"
+  }
+}

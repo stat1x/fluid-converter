@@ -1,0 +1,13 @@
+//Override Bootstrap _variables.scss here
+
+$enable-flex: true;
+$enable-transitions: true;
+$enable-rounded: false;
+
+$grid-columns: 17;
+
+$primary-color: #428bca;
+
+//Override FontAwesome _variables.scss here
+
+$fa-font-path: '../Vendors/font-awesome/fonts';

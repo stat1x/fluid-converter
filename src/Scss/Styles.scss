@@ -1,0 +1,33 @@
+@import 'Partials/variables';
+@import 'Partials/mixins';
+@import 'Partials/functions';
+@import '../Vendors/bootstrap/scss/bootstrap';
+@import '../Vendors/font-awesome/scss/font-awesome';
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,900italic,900,700,700italic,400italic,100);
+
+body {
+  padding-top: 5rem;
+}
+
+.starter-template {
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
+.conversion {
+  margin-bottom: 60px;
+}
+
+#conversion-form {
+  .form-group {
+    width: 100%;
+  }
+
+  #textToConvert {
+    width: 88%;
+  }
+}
+
+.fluid-color {
+  color: $primary-color;
+}

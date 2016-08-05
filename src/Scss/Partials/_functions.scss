@@ -1,0 +1,18 @@
+@function trim-unit($value) {
+  @return $value / ($value * 0 + 1);
+}
+
+@function to-rem($value, $base) {
+  @return trim-unit($value) / trim-unit($base) * 1rem;
+}
+
+@function rem-calc($values) {
+  $rem-values: ();
+  $count: length($values);
+
+  @for $i from 1 through $count {
+    $rem-values: append($rem-values, to-rem(nth($values, $i), $font-size-root));
+  }
+
+  @return $rem-values;
+}
