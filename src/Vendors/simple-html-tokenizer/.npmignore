@@ -1,0 +1,7 @@
+/node_modules/
+/test/
+/bin/
+/.jshintrc
+/.npmignore
+/.travis.yml
+/testem.json

@@ -1,0 +1,29 @@
+{
+  "name": "simple-html-tokenizer",
+  "version": "0.2.5",
+  "license": "MIT",
+  "description": "Simple HTML Tokenizer is a lightweight JavaScript library that can be used to tokenize the kind of HTML normally found in templates.",
+  "keywords": [
+    "html",
+    "tokenizer"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tildeio/simple-html-tokenizer.git"
+  },
+  "main": "dist/simple-html-tokenizer.js",
+  "jsnext:main": "lib/simple-html-tokenizer.js",
+  "scripts": {
+    "build": "bin/build.js",
+    "prepublish": "npm run build",
+    "test": "testem ci",
+    "lint": "jshint bin lib test"
+  },
+  "devDependencies": {
+    "jshint": "^2.8.0",
+    "qunit-extras": "^1.4.2",
+    "qunitjs": "^1.18.0",
+    "rollup": "^0.14.1",
+    "testem": "^0.9.2"
+  }
+}

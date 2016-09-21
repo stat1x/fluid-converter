@@ -1,0 +1,16 @@
+{
+  "test_page": "test/index.html",
+  "parallel": 5,
+  "before_tests": "bin/build.js",
+  "launchers": {
+    "Node": {
+      "command": "bin/test.js testem",
+      "protocol": "tap"
+    }
+  },
+  "src_files": [
+    "lib/**/*.js",
+    "test/*.js"
+  ],
+  "launch_in_ci":  ["Node", "PhantomJS"]
+}
