@@ -1,8 +1,8 @@
-var gulp = require('gulp'),
-	plugins = require('gulp-load-plugins')(),
-	config = require('../gulpconfig')();
+import gulp from 'gulp';
+import clean from 'gulp-clean';
+import config from '../gulp.config';
 
 gulp.task('clean', () => {
 	return gulp.src(config.distPath + '/**/*.*', {read: false})
-		.pipe(plugins.clean({force: true}));
+		.pipe(clean({force: true}));
 });

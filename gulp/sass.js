@@ -1,21 +1,26 @@
-var gulp = require('gulp'),
-	plugins = require('gulp-load-plugins')(),
-	config = require('../gulpconfig')();
+import gulp from "gulp";
+import plumber from "gulp-plumber";
+import sass from "gulp-sass";
+import autoprefixer from "gulp-autoprefixer";
+import rename from "gulp-rename";
+import scssLint from "gulp-scss-lint";
+import cleanCss from "gulp-clean-css";
+import config from "../gulp.config";
 
 gulp.task('sass', () => {
 	return gulp.src(config.src.stylesheets + '**/*.scss')
-		.pipe(plugins.plumber())
-		.pipe(plugins.sass().on('error', plugins.sass.logError))
-		.pipe(plugins.autoprefixer({
+		.pipe(plumber())
+		.pipe(sass().on('error', sass.logError))
+		.pipe(autoprefixer({
 			browsers: config.COMPATIBILITY
 		}))
-		.pipe(plugins.rename({
+		.pipe(rename({
 			suffix: '.min'
 		}))
-		.pipe(plugins.cleanCss())
+		.pipe(cleanCss())
 		.pipe(gulp.dest(config.dist.stylesheets))
 		.on('finish', () => {
-			gulp.src(config.src.stylesheets + '**/*.scss').pipe(plugins.scssLint({
+			gulp.src(config.src.stylesheets + '**/*.scss').pipe(scssLint({
 				config: '.scss-lint.yml'
 			}))
 		});

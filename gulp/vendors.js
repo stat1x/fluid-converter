@@ -1,7 +1,12 @@
-var gulp = require('gulp'),
-	plugins = require('gulp-load-plugins')(),
-	config = require('../gulpconfig')();
+import gulp from 'gulp';
+import directorySync  from 'gulp-directory-sync';
+import config from '../gulp.config';
 
 gulp.task('vendors', () => {
-	return gulp.src('').pipe(plugins.directorySync(config.src.vendors, config.dist.vendors, {printSummary: true}));
+	return gulp.src([
+		config.src.vendors + '**/*.min.*',
+		'!' + config.src.vendors + '**/extras/**',
+		'!' + config.src.vendors + '**/external/**',
+		'!' + config.src.vendors + '**/templates/**'
+	]).pipe(gulp.dest(config.dist.vendors));
 });

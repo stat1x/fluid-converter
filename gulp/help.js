@@ -1,5 +1,8 @@
-var config = require('../gulpconfig.js')(),
-	plugins = require('gulp-load-plugins')(),
-	gulp = plugins.help(require('gulp'), config.gulphelp.options);
+import gulp from 'gulp';
+import help from 'gulp-help';
+import taskListing from 'gulp-task-listing';
+import config from '../gulp.config';
 
-gulp.task('help', plugins.taskListing);
+help(gulp, config.gulphelp.options);
+
+gulp.task('help', taskListing);
