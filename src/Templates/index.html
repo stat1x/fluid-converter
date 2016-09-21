@@ -8,7 +8,7 @@
 <div class="container">
 	<div class="starter-template">
 		<div class="conversion convert-this">
-			<h3>Convert Fluid tags into inline notation</h3>
+			<h1>Convert Fluid tags into inline notation</h1>
 			<p class="lead">This tool has been created for people who don't like to waste their time. Come on try it!</p>
 		</div>
 		<h5>This:</h5>
@@ -18,17 +18,17 @@
 		<code>{f:image(src: 'EXT:my_ext/Resources/Public/typo3_logo.png', alt: 'alt text', minWidth: 30, maxWidth:
 			40)}</code>
 	</div>
-	<form class="form-inline" id="conversion-form">
+	<form class="form-inline conversion-form" id="conversion-form">
 		<div class="form-group">
-			<label for="textToConvert" class="sr-only">Email address</label>
-			<textarea class="form-control form-control-lg" id="textToConvert" rows="3"
+			<label for="fluid-tag-to-convert" class="sr-only">Email address</label>
+			<textarea class="form-control form-control-lg fluid-tag-to-convert" id="fluid-tag-to-convert" rows="3"
 					  placeholder="Enter the fluid tag you want to convert here"></textarea>
 			<button type="submit" class="btn btn-primary btn-lg">Submit</button>
 		</div>
 	</form>
 
 	<div class="starter-template">
-		<code id="conversionResult" class="hide">
+		<code id="conversion-result" class="hide">
 
 		</code>
 	</div>

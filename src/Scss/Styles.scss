@@ -18,14 +18,14 @@ body {
   margin-bottom: 60px;
 }
 
-#conversion-form {
+.conversion-form {
   .form-group {
     width: 100%;
   }
+}
 
-  #textToConvert {
-    width: 88%;
-  }
+.form-inline .fluid-tag-to-convert {
+  width: 88%;
 }
 
 .fluid-color {
