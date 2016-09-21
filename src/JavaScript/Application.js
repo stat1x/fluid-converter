@@ -2,26 +2,28 @@ import AbstractApplication from "./AbstractApplication";
 import * as HTML5Tokenizer from "../Vendors/simple-html-tokenizer/lib/simple-html-tokenizer/index";
 
 export default class Application extends AbstractApplication {
+
 	constructor() {
 		super();
+		this.conversionForm = $('#conversion-form');
+		this.conversionResult = $('#conversion-result');
 	}
 
 	start() {
-		Application.initializeConvertForm()
+		this.initializeConvertForm()
 	}
 
 	initializePlugins() {
 	}
 
-	static initializeConvertForm() {
-		$('#conversion-form').submit((event) => {
+	initializeConvertForm() {
+		this.conversionForm.submit((event) => {
 			event.preventDefault();
-			Application.convertFluidTags();
+			this.conversionResult.html(this.convertFluidTags($('#fluid-tag-to-convert').val())).removeClass('hide');
 		});
 	}
 
-	static convertFluidTags() {
-		var textToConvert = $('#fluid-tag-to-convert').val();
+	convertFluidTags(textToConvert) {
 		var viewHelperName = textToConvert.split(/(<(.+?) )/)[2];
 		var attrs = HTML5Tokenizer.tokenize(textToConvert)[0].attributes;
 		var textConverted = '{' + viewHelperName + '(';
@@ -34,6 +36,7 @@ export default class Application extends AbstractApplication {
 			}
 		});
 		textConverted += ')}';
-		$('#conversion-result').html(textConverted).removeClass('hide');
+		return textConverted;
+
 	}
 }

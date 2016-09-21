@@ -86,29 +86,34 @@ var Application = function (_AbstractApplication) {
 	function Application() {
 		_classCallCheck(this, Application);
 
-		return _possibleConstructorReturn(this, (Application.__proto__ || Object.getPrototypeOf(Application)).call(this));
+		var _this = _possibleConstructorReturn(this, (Application.__proto__ || Object.getPrototypeOf(Application)).call(this));
+
+		_this.conversionForm = $('#conversion-form');
+		_this.conversionResult = $('#conversion-result');
+		return _this;
 	}
 
 	_createClass(Application, [{
 		key: "start",
 		value: function start() {
-			Application.initializeConvertForm();
+			this.initializeConvertForm();
 		}
 	}, {
 		key: "initializePlugins",
 		value: function initializePlugins() {}
-	}], [{
+	}, {
 		key: "initializeConvertForm",
 		value: function initializeConvertForm() {
-			$('#conversion-form').submit(function (event) {
+			var _this2 = this;
+
+			this.conversionForm.submit(function (event) {
 				event.preventDefault();
-				Application.convertFluidTags();
+				_this2.conversionResult.html(_this2.convertFluidTags($('#fluid-tag-to-convert').val())).removeClass('hide');
 			});
 		}
 	}, {
 		key: "convertFluidTags",
-		value: function convertFluidTags() {
-			var textToConvert = $('#fluid-tag-to-convert').val();
+		value: function convertFluidTags(textToConvert) {
 			var viewHelperName = textToConvert.split(/(<(.+?) )/)[2];
 			var attrs = HTML5Tokenizer.tokenize(textToConvert)[0].attributes;
 			var textConverted = '{' + viewHelperName + '(';
@@ -121,7 +126,7 @@ var Application = function (_AbstractApplication) {
 				}
 			});
 			textConverted += ')}';
-			$('#conversion-result').html(textConverted).removeClass('hide');
+			return textConverted;
 		}
 	}]);
 
