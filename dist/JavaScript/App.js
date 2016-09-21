@@ -108,25 +108,25 @@ var Application = function (_AbstractApplication) {
 
 			this.conversionForm.submit(function (event) {
 				event.preventDefault();
-				_this2.conversionResult.html(_this2.convertFluidTags($('#fluid-tag-to-convert').val())).removeClass('hide');
+				_this2.conversionResult.html(_this2.convertFluidTags($('#fluid-node-to-convert').val())).removeClass('hide');
 			});
 		}
 	}, {
 		key: "convertFluidTags",
-		value: function convertFluidTags(textToConvert) {
-			var viewHelperName = textToConvert.split(/(<(.+?) )/)[2];
-			var attrs = HTML5Tokenizer.tokenize(textToConvert)[0].attributes;
-			var textConverted = '{' + viewHelperName + '(';
+		value: function convertFluidTags(fluidNodeToConvert) {
+			var viewHelperName = fluidNodeToConvert.split(/(<(.+?) )/)[2];
+			var attrs = HTML5Tokenizer.tokenize(fluidNodeToConvert)[0].attributes;
+			var inline = '{' + viewHelperName + '(';
 			$.each(attrs, function (i, attr) {
-				textConverted += attr[0] + ': \'' + attr[1];
+				inline += attr[0] + ': \'' + attr[1];
 				if (i < attrs.length - 1) {
-					textConverted += '\', ';
+					inline += '\', ';
 				} else {
-					textConverted += '\'';
+					inline += '\'';
 				}
 			});
-			textConverted += ')}';
-			return textConverted;
+			inline += ')}';
+			return inline;
 		}
 	}]);
 
