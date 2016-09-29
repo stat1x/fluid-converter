@@ -37,6 +37,7 @@
     "gulp-uglify": "^1.5.3",
     "gulp-util": "^3.0.7",
     "gulp-watch": "^4.3.5",
+    "highlight.js": "^9.7.0",
     "install": "^0.8.1",
     "jshint": "^2.9.2",
     "npm": "^3.10.2",

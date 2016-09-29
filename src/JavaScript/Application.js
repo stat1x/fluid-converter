@@ -1,5 +1,6 @@
 import AbstractApplication from "./AbstractApplication";
 import * as HTML5Tokenizer from "../Vendors/simple-html-tokenizer/lib/simple-html-tokenizer/index";
+import hljs from "highlight.js"
 
 export default class Application extends AbstractApplication {
 
@@ -7,6 +8,7 @@ export default class Application extends AbstractApplication {
 		super();
 		this.conversionForm = $('#conversion-form');
 		this.conversionResult = $('#conversion-result');
+		this.fluidNodeToConvert = $('#fluid-node-to-convert');
 	}
 
 	start() {
@@ -14,13 +16,21 @@ export default class Application extends AbstractApplication {
 	}
 
 	initializePlugins() {
+		this.initializeHljs();
+	}
+
+	initializeHljs() {
+		$('pre code').each(function(i, block) {
+			hljs.highlightBlock(block);
+		});
 	}
 
 	initializeConvertForm() {
 		this.conversionForm.submit((event) => {
 			event.preventDefault();
-			this.conversionResult
-				.html(this.convertFluidTags($('#fluid-node-to-convert').val())).removeClass('hide');
+			let convertionResult = this.convertFluidTags(this.fluidNodeToConvert.val());
+			let newBlock = $('<code class="js">' + convertionResult + '</code>');
+			this.conversionResult.append(newBlock);
 		});
 	}
 

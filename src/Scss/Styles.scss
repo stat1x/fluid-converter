@@ -6,12 +6,40 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,900italic,900,700,700italic,400italic,100);
 
 body {
-  padding-top: 5rem;
+  padding-top: 3.2rem;
 }
 
-.starter-template {
-  padding: 3rem 1.5rem;
-  text-align: center;
+pre {
+  display: inline;
+}
+
+.hljs {
+  background: #373a3c;
+  display: inline;
+  margin-right: 6px;
+  padding-top: 8px;
+}
+
+.site-header {
+  background: url('../Images/header-bg.jpg');
+  background-position: 0 -680px;
+  color: #fff;
+  height: 280px;
+  padding: 50px 0;
+  position: relative;
+
+  .overlay {
+    background: rgba(0, 0, 0, .35);
+    height: 100%;
+    padding-top: 40px;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+}
+
+.spacer {
+  padding: 3rem 0;
 }
 
 .conversion {
@@ -29,5 +57,5 @@ body {
 }
 
 .fluid-color {
-  color: $primary-color;
+  color: $brand-primary;
 }
