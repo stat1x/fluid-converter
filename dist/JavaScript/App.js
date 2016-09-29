@@ -15719,6 +15719,7 @@ var Application = function (_AbstractApplication) {
 		_this.conversionForm = $('#conversion-form');
 		_this.conversionResult = $('#conversion-result');
 		_this.fluidNodeToConvert = $('#fluid-node-to-convert');
+		_this.submitConversion = $('#submit-conversion');
 		return _this;
 	}
 
@@ -15744,28 +15745,56 @@ var Application = function (_AbstractApplication) {
 		value: function initializeConvertForm() {
 			var _this2 = this;
 
+			this.fluidNodeToConvert.on('input change', function () {
+				if (_this2.fluidNodeToConvert.val() !== '') {
+					_this2.submitConversion.removeAttr('disabled');
+				} else {
+					_this2.submitConversion.attr('disabled', true);
+				}
+			});
+
+			this.fluidNodeToConvert.keydown(function (event) {
+				if (event.keyCode === 13 && !event.shiftKey) {
+					event.preventDefault();
+				}
+			});
+
 			this.conversionForm.submit(function (event) {
 				event.preventDefault();
+				_this2.clearOutput();
 				var convertionResult = _this2.convertFluidTags(_this2.fluidNodeToConvert.val());
-				var newBlock = $('<code class="js">' + convertionResult + '</code>');
-				_this2.conversionResult.append(newBlock);
+				if (convertionResult !== '') {
+					var newBlock = $('<code class="js">' + convertionResult + '</code>');
+					_this2.conversionResult.append(newBlock);
+				}
 			});
+		}
+	}, {
+		key: "clearOutput",
+		value: function clearOutput() {
+			this.conversionResult.empty();
 		}
 	}, {
 		key: "convertFluidTags",
 		value: function convertFluidTags(fluidNodeToConvert) {
-			var viewHelperName = fluidNodeToConvert.split(/(<(.+?) )/)[2];
+			var inline = '';
 			var attrs = HTML5Tokenizer.tokenize(fluidNodeToConvert)[0].attributes;
-			var inline = '{' + viewHelperName + '(';
-			$.each(attrs, function (i, attr) {
-				inline += attr[0] + ': \'' + attr[1];
-				if (i < attrs.length - 1) {
-					inline += '\', ';
-				} else {
-					inline += '\'';
-				}
-			});
-			inline += ')}';
+			if (attrs) {
+				var viewHelperName = fluidNodeToConvert.split(/(<(.+?) )/)[2];
+				inline = '{' + viewHelperName + '(';
+				$.each(attrs, function (i, attr) {
+					inline += attr[0] + ': \'' + attr[1];
+					if (i < attrs.length - 1) {
+						inline += '\', ';
+					} else {
+						inline += '\'';
+					}
+				});
+				inline += ')}';
+			} else {
+				console.log("oops it doesn't seem to be a fluid tag");
+			}
+
 			return inline;
 		}
 	}]);

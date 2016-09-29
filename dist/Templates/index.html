@@ -20,6 +20,12 @@
 <nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
 	<div class="container-fluid">
 		<a class="navbar-brand" href="/Templates">Fluid<span class="fluid-color">Converter</span></a>
+		<a class="pull-right" href="https://github.com/jeremieroulin/fluid-converter/fork" target="_blank"
+		   data-icon="octicon-repo-forked" data-style="mega" data-count-href="/jeremieroulin/fluid-converter/network"
+		   data-count-api="/repos/jeremieroulin/fluid-converter#forks_count" data-count-aria-label="# forks on GitHub"
+		   aria-label="Fork jeremieroulin/fluid-converter on GitHub">
+			<i class="fa fa-2x fa-code-fork" aria-hidden="true"></i>
+		</a>
 	</div>
 </nav>
 
@@ -31,36 +37,58 @@
 				<h1>Convert Fluid tags into inline notation</h1>
 				<div class="row">
 					<div class="col-md-7 col-xs-12">
-						<p class="lead">This tool has been created for people who don't like to waste their time. Come on
+						<p class="lead">This tool has been created for people who don't like to waste their time. Come
+							on
 							try it!</p>
 					</div>
 				</div>
 				<h6>Example:</h6>
-				<pre><code class="html pull-left">&ltf:myTag myAttr="myAttrVal"/></code></pre><pre><code class="html pull-left">=></code></pre><pre><code class="js pull-left">{f:myTag(myAttr: 'myAttrVal')}</code></pre>
+				<pre><code class="html pull-left">&ltf:myTag myAttr1="myAttrVal" myAttr2="{obj.prop}"/></code></pre>
+				<pre><code class="html pull-left">=></code></pre>
+				<pre><code class="js pull-left">{f:myTag(myAttr1: 'myAttrVal', myAttr2: '{obj.prop}')}</code></pre>
 			</div>
+			<form class="form-inline conversion-form" id="conversion-form">
+				<div class="form-group">
+					<label for="fluid-node-to-convert" class="sr-only">Email address</label>
+					<input class="form-control form-control-lg fluid-node-to-convert" id="fluid-node-to-convert"
+						   placeholder="Enter the fluid tag you want to convert here"/>
+					<button type="submit" class="btn btn-primary btn-lg" id="submit-conversion" disabled>Convert</button>
+				</div>
+			</form>
 		</div>
 	</div>
 </header>
 
 <div class="container">
-	<div class="spacer text-xs-center">
-		<form class="form-inline conversion-form" id="conversion-form">
-			<div class="form-group">
-				<label for="fluid-node-to-convert" class="sr-only">Email address</label>
-				<textarea class="form-control form-control-lg fluid-node-to-convert" id="fluid-node-to-convert" rows="3"
-						  placeholder="Enter the fluid tag you want to convert here"></textarea>
-				<button type="submit" class="btn btn-primary btn-lg">Convert</button>
+	<div class="spacer">
+		<div class="text-xs-center">
+			<pre id="conversion-result"></pre>
+		</div>
+		<h5>Conversion history</h5>
+		<div class="list-group conversion-history">
+			<div class="list-group-item">
+				<h4 class="list-group-item-text">Second List Group Item Heading</h4>
+				<p class="list-group-item-text">List Group Item Text</p>
 			</div>
-		</form>
-	</div>
-
-	<div class="text-xs-center">
-		<pre id="conversion-result"></pre>
+			<div class="list-group-item">
+				<h4 class="list-group-item-text">Second List Group Item Heading</h4>
+				<p class="list-group-item-text">List Group Item Text</p>
+			</div>
+			<div class="list-group-item">
+				<h4 class="list-group-item-heading">Third List Group Item Heading</h4>
+				<p class="list-group-item-text">List Group Item Text</p>
+			</div>
+			<div class="list-group-item">
+				<h4 class="list-group-item-heading">Third List Group Item Heading</h4>
+				<p class="list-group-item-text">List Group Item Text</p>
+			</div>
+		</div>
 	</div>
 </div>
 
 
 
+<script async defer src="https://buttons.github.io/buttons.js"></script>
 <script src="../Vendors/jquery/dist/jquery.min.js"></script>
 <script src="../JavaScript/App.js"></script>
 </body>

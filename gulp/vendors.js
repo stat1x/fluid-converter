@@ -8,6 +8,7 @@ gulp.task('vendors', () => {
 		config.src.vendors + '**/*.pack.*',
 		config.src.vendors + '**/default.css',
 		config.src.vendors + '**/arta.css',
+		config.src.vendors + '**/fonts/*',
 		'!' + config.src.vendors + '**/extras/**',
 		'!' + config.src.vendors + '**/external/**',
 		'!' + config.src.vendors + '**/templates/**'

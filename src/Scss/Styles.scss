@@ -14,17 +14,22 @@ pre {
 }
 
 .hljs {
-  background: #373a3c;
+  background: rgba(55, 58, 60, .85);
   display: inline;
   margin-right: 6px;
   padding-top: 8px;
+}
+
+.conversion-history {
+  height: 350px;
+  overflow-y: auto;
 }
 
 .site-header {
   background: url('../Images/header-bg.jpg');
   background-position: 0 -680px;
   color: #fff;
-  height: 280px;
+  height: 340px;
   padding: 50px 0;
   position: relative;
 
