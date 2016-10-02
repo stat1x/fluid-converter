@@ -13,11 +13,25 @@ pre {
   display: inline;
 }
 
+#conversion-result .hljs {
+  background: rgba(55, 58, 60, 1);
+}
+
 .hljs {
   background: rgba(55, 58, 60, .85);
   display: inline;
   margin-right: 6px;
   padding-top: 8px;
+}
+
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-template-variable,
+.hljs-attribute,
+.hljs-link {
+  color: #64a;
 }
 
 .conversion-history {
@@ -29,18 +43,20 @@ pre {
   background: url('../Images/header-bg.jpg');
   background-position: 0 -680px;
   color: #fff;
-  height: 400px;
-  padding: 50px 0;
+  //height: 400px;
   position: relative;
 
   .overlay {
     background: rgba(0, 0, 0, .35);
     height: 100%;
-    padding-top: 40px;
-    position: absolute;
+    padding: 40px 0;
     top: 0;
     width: 100%;
   }
+}
+
+.fluid-node-error {
+  color: #ff392d;
 }
 
 .spacer {
@@ -48,7 +64,7 @@ pre {
 }
 
 .conversion {
-  margin-bottom: 60px;
+  margin-bottom: 25px;
 }
 
 .conversion-form {
@@ -57,10 +73,16 @@ pre {
   }
 }
 
-.form-inline .fluid-node-to-convert {
-  font-size: 15px;
-  padding-left: 10px;
-  width: 88%;
+.form-inline {
+  .fluid-node-to-convert {
+    font-size: 15px;
+    padding-left: 10px;
+    width: 83%;
+  }
+
+  .btn {
+    width: 16%;
+  }
 }
 
 .fluid-color {

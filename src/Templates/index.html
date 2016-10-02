@@ -11,16 +11,19 @@
 			<div class="conversion convert-this">
 				<h1>Convert Fluid tags into inline notation</h1>
 				<div class="row">
-					<div class="col-md-7 col-xs-12">
+					<div class="col-md-6 col-sm-10 col-xs-12">
 						<p class="lead">This tool has been created for people who don't like to waste their time. Come
 							on
 							try it!</p>
 					</div>
 				</div>
 				<h6>Example:</h6>
-				<pre><code class="html pull-left">&ltf:myTag myAttr1="myAttrVal" myAttr2="{obj.prop}"/></code></pre>
-				<pre><code class="html pull-left">=></code></pre>
-				<pre><code class="js pull-left">{f:myTag(myAttr1: 'myAttrVal', myAttr2: '{obj.prop}')}</code></pre>
+				<div class="example-wrapper">
+					<pre><code class="html pull-left">&ltf:myTag myAttr1="myAttrVal" myAttr2="{obj.prop}"/></code></pre>
+					<pre><code class="html pull-left">=></code></pre>
+					<pre><code class="js pull-left">{f:myTag(myAttr1: 'myAttrVal', myAttr2: '{obj.prop}')}</code></pre>
+					<div class="clearfix"></div>
+				</div>
 			</div>
 			<form class="form-inline conversion-form" id="conversion-form">
 				<div class="form-group">
@@ -29,6 +32,7 @@
 						   placeholder="Enter the fluid tag you want to convert here"></textarea>
 					<button type="submit" class="btn btn-primary btn-lg" id="submit-conversion" disabled>Convert</button>
 				</div>
+				<p id="fluid-node-error" class="fluid-node-error"></p>
 			</form>
 		</div>
 	</div>
@@ -39,25 +43,25 @@
 		<div class="text-xs-center">
 			<pre id="conversion-result"></pre>
 		</div>
-		<h5>Conversion history</h5>
-		<div class="list-group conversion-history">
-			<div class="list-group-item">
-				<h4 class="list-group-item-text">Second List Group Item Heading</h4>
-				<p class="list-group-item-text">List Group Item Text</p>
-			</div>
-			<div class="list-group-item">
-				<h4 class="list-group-item-text">Second List Group Item Heading</h4>
-				<p class="list-group-item-text">List Group Item Text</p>
-			</div>
-			<div class="list-group-item">
-				<h4 class="list-group-item-heading">Third List Group Item Heading</h4>
-				<p class="list-group-item-text">List Group Item Text</p>
-			</div>
-			<div class="list-group-item">
-				<h4 class="list-group-item-heading">Third List Group Item Heading</h4>
-				<p class="list-group-item-text">List Group Item Text</p>
-			</div>
-		</div>
+		<!--<h5>Conversion history</h5>-->
+		<!--<div class="list-group conversion-history">-->
+			<!--<div class="list-group-item">-->
+				<!--<h4 class="list-group-item-text">Second List Group Item Heading</h4>-->
+				<!--<p class="list-group-item-text">List Group Item Text</p>-->
+			<!--</div>-->
+			<!--<div class="list-group-item">-->
+				<!--<h4 class="list-group-item-text">Second List Group Item Heading</h4>-->
+				<!--<p class="list-group-item-text">List Group Item Text</p>-->
+			<!--</div>-->
+			<!--<div class="list-group-item">-->
+				<!--<h4 class="list-group-item-heading">Third List Group Item Heading</h4>-->
+				<!--<p class="list-group-item-text">List Group Item Text</p>-->
+			<!--</div>-->
+			<!--<div class="list-group-item">-->
+				<!--<h4 class="list-group-item-heading">Third List Group Item Heading</h4>-->
+				<!--<p class="list-group-item-text">List Group Item Text</p>-->
+			<!--</div>-->
+		<!--</div>-->
 	</div>
 </div>
 

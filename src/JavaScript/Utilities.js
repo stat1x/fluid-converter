@@ -1,4 +1,5 @@
 export default class Utilities {
+
 	/**
 	 * Checks if the given node (as a string) is a valid fluid node. It has to starts with <myNamespace:myViewHelper...>
 	 * and has to be a valid HTML.
@@ -6,11 +7,11 @@ export default class Utilities {
 	 * @param fluidNodeRaw
 	 * @returns {boolean}
 	 */
-	static isFluidTag(fluidNodeRaw) {
+	static isFluidNode(fluidNodeRaw) {
 		let a = document.createElement('div');
-		let regex = new RegExp('\<[a-zA-Z]+\:[a-zA-Z]+(.+?)\>');
+		let fluidRegExp = new RegExp('\<[a-zA-Z]+\:[a-zA-Z]+(.+?)\>');
 		a.innerHTML = fluidNodeRaw;
-		if (regex.test(fluidNodeRaw)) {
+		if (fluidRegExp.test(fluidNodeRaw)) {
 			for (let c = a.childNodes, i = c.length; i--;) {
 				if (c[i].nodeType === 1) return true;
 			}
@@ -37,10 +38,49 @@ export default class Utilities {
 	 */
 	static sanitizeFluidNode(fluidNode) {
 		fluidNode.forEach((tag, index) => {
-			if (/\r|\n/.exec(tag.chars)) {
+			if (/\r|\n/.exec(tag.chars) || /\s+/g.exec(tag.chars)) {
 				fluidNode.splice(index, 1);
 			}
 		});
 		return fluidNode;
+	}
+
+	/**
+	 * Converts a fluid node to its inline notation
+	 *
+	 * @param fluidNodeToConvert
+	 * @returns {string}
+	 */
+	static convertFluidNode(fluidNodeToConvert) {
+		let inline = '';
+		let attrs = fluidNodeToConvert[0].attributes;
+
+		if (attrs) {
+			let viewHelperName = Utilities.getFluidViewHelperName(fluidNodeToConvert);
+			if (viewHelperName) {
+				if (fluidNodeToConvert[1] && fluidNodeToConvert[1].type === 'Chars') {
+					inline = '{' + fluidNodeToConvert[1].chars.replace('{', '').replace('}', '') + ' -> ' + viewHelperName + '(';
+				} else {
+					inline = '{' + viewHelperName + '(';
+				}
+				attrs.forEach((attr, index) => {
+					inline += attr[0] + ': \'' + attr[1];
+					if (index < attrs.length - 1) {
+						inline += '\', ';
+					} else {
+						inline += '\'';
+					}
+				});
+				if (viewHelperName === 'f:if' && fluidNodeToConvert[1]) {
+					inline += ', then: \'' + fluidNodeToConvert[2].chars + '\', ';
+					if (fluidNodeToConvert[4]) {
+						inline += 'else: \'' + fluidNodeToConvert[5].chars + '\'';
+					}
+				}
+				inline += ')}';
+			}
+		}
+
+		return inline;
 	}
 }

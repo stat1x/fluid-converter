@@ -15727,6 +15727,7 @@ var Application = function (_AbstractApplication) {
 		_this.conversionResult = $('#conversion-result');
 		_this.fluidNodeToConvert = $('#fluid-node-to-convert');
 		_this.submitConversion = $('#submit-conversion');
+		_this.fluidNodeError = $('#fluid-node-error');
 		return _this;
 	}
 
@@ -15775,25 +15776,26 @@ var Application = function (_AbstractApplication) {
 			this.fluidNodeToConvert.on('input change', function () {
 				if (_this2.fluidNodeToConvert.val() === '') {
 					_this2.submitConversion.attr('disabled', true);
-				} else if (!_Utilities2.default.isFluidTag(_this2.fluidNodeToConvert.val())) {
+					_this2.fluidNodeError.empty();
+				} else if (!_Utilities2.default.isFluidNode(_this2.fluidNodeToConvert.val())) {
 					_this2.submitConversion.attr('disabled', true);
-					// @TODO Display error message
-					console.log("Ooops this is not a valid fluid tag");
+					_this2.fluidNodeError.html('This is not a valid fluid node');
 				} else {
 					_this2.submitConversion.removeAttr('disabled');
+					_this2.fluidNodeError.empty();
 				}
 			});
 
 			this.conversionForm.on('submit', function (event) {
 				event.preventDefault();
 				_this2.clearOutput();
-
 				var fluidNode = HTML5Tokenizer.tokenize(_this2.fluidNodeToConvert.val());
-				var convertionResult = _this2.convertFluidNode(_Utilities2.default.sanitizeFluidNode(fluidNode));
+				var convertionResult = _Utilities2.default.convertFluidNode(_Utilities2.default.sanitizeFluidNode(fluidNode));
 				if (convertionResult !== '') {
 					var newBlock = $('<code class="js">' + convertionResult + '</code>');
 					_this2.conversionResult.append(newBlock);
 				}
+				_this2.initializeHljs();
 			});
 		}
 
@@ -15805,44 +15807,6 @@ var Application = function (_AbstractApplication) {
 		key: "clearOutput",
 		value: function clearOutput() {
 			this.conversionResult.empty();
-		}
-
-		/**
-   * Converts a fluid node to its inline notation
-   *
-   * @param fluidNodeToConvert
-   * @returns {string}
-   */
-
-	}, {
-		key: "convertFluidNode",
-		value: function convertFluidNode(fluidNodeToConvert) {
-			var inline = '';
-			var attrs = fluidNodeToConvert[0].attributes;
-
-			if (attrs) {
-				var viewHelperName = _Utilities2.default.getFluidViewHelperName(fluidNodeToConvert);
-				if (viewHelperName) {
-					inline = '{' + viewHelperName + '(';
-					$.each(attrs, function (i, attr) {
-						inline += attr[0] + ': \'' + attr[1];
-						if (i < attrs.length - 1) {
-							inline += '\', ';
-						} else {
-							inline += '\'';
-						}
-					});
-					if (viewHelperName === 'f:if' && fluidNodeToConvert[1]) {
-						inline += ', then: \'' + fluidNodeToConvert[2].chars + '\', ';
-						if (fluidNodeToConvert[4]) {
-							inline += 'else: \'' + fluidNodeToConvert[5].chars + '\'';
-						}
-					}
-					inline += ')}';
-				}
-			}
-
-			return inline;
 		}
 	}]);
 
@@ -15881,7 +15845,8 @@ var Utilities = function () {
 	}
 
 	_createClass(Utilities, null, [{
-		key: 'isFluidTag',
+		key: 'isFluidNode',
+
 
 		/**
    * Checks if the given node (as a string) is a valid fluid node. It has to starts with <myNamespace:myViewHelper...>
@@ -15890,11 +15855,11 @@ var Utilities = function () {
    * @param fluidNodeRaw
    * @returns {boolean}
    */
-		value: function isFluidTag(fluidNodeRaw) {
+		value: function isFluidNode(fluidNodeRaw) {
 			var a = document.createElement('div');
-			var regex = new RegExp('\<[a-zA-Z]+\:[a-zA-Z]+(.+?)\>');
+			var fluidRegExp = new RegExp('\<[a-zA-Z]+\:[a-zA-Z]+(.+?)\>');
 			a.innerHTML = fluidNodeRaw;
-			if (regex.test(fluidNodeRaw)) {
+			if (fluidRegExp.test(fluidNodeRaw)) {
 				for (var c = a.childNodes, i = c.length; i--;) {
 					if (c[i].nodeType === 1) return true;
 				}
@@ -15927,11 +15892,53 @@ var Utilities = function () {
 		key: 'sanitizeFluidNode',
 		value: function sanitizeFluidNode(fluidNode) {
 			fluidNode.forEach(function (tag, index) {
-				if (/\r|\n/.exec(tag.chars)) {
+				if (/\r|\n/.exec(tag.chars) || /\s+/g.exec(tag.chars)) {
 					fluidNode.splice(index, 1);
 				}
 			});
 			return fluidNode;
+		}
+
+		/**
+   * Converts a fluid node to its inline notation
+   *
+   * @param fluidNodeToConvert
+   * @returns {string}
+   */
+
+	}, {
+		key: 'convertFluidNode',
+		value: function convertFluidNode(fluidNodeToConvert) {
+			var inline = '';
+			var attrs = fluidNodeToConvert[0].attributes;
+
+			if (attrs) {
+				var viewHelperName = Utilities.getFluidViewHelperName(fluidNodeToConvert);
+				if (viewHelperName) {
+					if (fluidNodeToConvert[1] && fluidNodeToConvert[1].type === 'Chars') {
+						inline = '{' + fluidNodeToConvert[1].chars.replace('{', '').replace('}', '') + ' -> ' + viewHelperName + '(';
+					} else {
+						inline = '{' + viewHelperName + '(';
+					}
+					attrs.forEach(function (attr, index) {
+						inline += attr[0] + ': \'' + attr[1];
+						if (index < attrs.length - 1) {
+							inline += '\', ';
+						} else {
+							inline += '\'';
+						}
+					});
+					if (viewHelperName === 'f:if' && fluidNodeToConvert[1]) {
+						inline += ', then: \'' + fluidNodeToConvert[2].chars + '\', ';
+						if (fluidNodeToConvert[4]) {
+							inline += 'else: \'' + fluidNodeToConvert[5].chars + '\'';
+						}
+					}
+					inline += ')}';
+				}
+			}
+
+			return inline;
 		}
 	}]);
 
