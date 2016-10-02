@@ -9,8 +9,10 @@ body {
   padding-top: 3.2rem;
 }
 
-pre {
-  display: inline;
+pre, .hljs {
+  @include media-breakpoint-up(sm) {
+    display: inline;
+  }
 }
 
 #conversion-result .hljs {
@@ -19,9 +21,11 @@ pre {
 
 .hljs {
   background: rgba(55, 58, 60, .85);
-  display: inline;
   margin-right: 6px;
   padding-top: 8px;
+  @include media-breakpoint-up(sm) {
+    margin-top: 10px;
+  }
 }
 
 .hljs-built_in,
@@ -40,23 +44,17 @@ pre {
 }
 
 .site-header {
-  background: url('../Images/header-bg.jpg');
-  background-position: 0 -680px;
+  background: url('../Images/header-bg.jpg') no-repeat 0 -680px;
   color: #fff;
-  //height: 400px;
   position: relative;
 
   .overlay {
     background: rgba(0, 0, 0, .35);
     height: 100%;
-    padding: 40px 0;
+    padding: 40px 0 60px;
     top: 0;
     width: 100%;
   }
-}
-
-.fluid-node-error {
-  color: #ff392d;
 }
 
 .spacer {
@@ -74,14 +72,36 @@ pre {
 }
 
 .form-inline {
+  position: relative;
+
   .fluid-node-to-convert {
     font-size: 15px;
     padding-left: 10px;
-    width: 83%;
+    width: 100%;
+
+    @include media-breakpoint-up(md) {
+      width: 83%;
+    }
+  }
+
+  .fluid-node-error {
+    bottom: -45px;
+    color: #ff392d;
+    position: absolute;
+  }
+
+  .form-text {
+    bottom: -50px;
+    position: absolute;
   }
 
   .btn {
-    width: 16%;
+    margin-top: 10px;
+
+    @include media-breakpoint-up(md) {
+      margin-top: 0;
+      width: 16%;
+    }
   }
 }
 

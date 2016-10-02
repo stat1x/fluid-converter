@@ -15,13 +15,14 @@ export default class Application extends AbstractApplication {
 		this.fluidNodeToConvert = $('#fluid-node-to-convert');
 		this.submitConversion = $('#submit-conversion');
 		this.fluidNodeError = $('#fluid-node-error');
+		this.fluidExample = $('#fluid-example');
 	}
 
 	/**
 	 * Starts the app
 	 */
 	start() {
-		this.initializeConvertForm()
+		this.initializeConvertForm();
 	}
 
 	/**
@@ -47,13 +48,15 @@ export default class Application extends AbstractApplication {
 		this.fluidNodeToConvert.on('input change', () => {
 			if (this.fluidNodeToConvert.val() === '') {
 				this.submitConversion.attr('disabled', true);
-				this.fluidNodeError.empty();
+				this.resetForm();
 			} else if (!Utilities.isFluidNode(this.fluidNodeToConvert.val())) {
 				this.submitConversion.attr('disabled', true);
+				this.fluidNodeToConvert.addClass('form-control-danger').parent().addClass('has-danger');
 				this.fluidNodeError.html('This is not a valid fluid node');
+				this.fluidExample.text('A fluid node should look like this : <myNamespace:myViewhelper myAttr="myVal"/>');
 			} else {
 				this.submitConversion.removeAttr('disabled');
-				this.fluidNodeError.empty();
+				this.resetForm();
 			}
 		});
 
@@ -63,7 +66,7 @@ export default class Application extends AbstractApplication {
 			let fluidNode = HTML5Tokenizer.tokenize(this.fluidNodeToConvert.val());
 			let convertionResult = Utilities.convertFluidNode(Utilities.sanitizeFluidNode(fluidNode));
 			if (convertionResult !== '') {
-				let newBlock = $('<code class="js">' + convertionResult + '</code>');
+				let newBlock = $('<code class="css">' + convertionResult + '</code>');
 				this.conversionResult.append(newBlock);
 			}
 			this.initializeHljs();
@@ -75,5 +78,14 @@ export default class Application extends AbstractApplication {
 	 */
 	clearOutput() {
 		this.conversionResult.empty();
+	}
+
+	/**
+	 * Resets the form
+	 */
+	resetForm() {
+		this.fluidNodeToConvert.removeClass('form-control-danger').parent().removeClass('has-danger');
+		this.fluidNodeError.empty();
+		this.fluidExample.empty();
 	}
 }

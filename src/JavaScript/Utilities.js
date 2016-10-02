@@ -38,10 +38,16 @@ export default class Utilities {
 	 */
 	static sanitizeFluidNode(fluidNode) {
 		fluidNode.forEach((tag, index) => {
-			if (/\r|\n/.exec(tag.chars) || /\s+/g.exec(tag.chars)) {
-				fluidNode.splice(index, 1);
+			if (tag.chars) {
+				if (!tag.chars.match(/[a-z]/i) && (/\r|\n/.exec(tag.chars) || /\s+/g.exec(tag.chars))) {
+					fluidNode.splice(index, 1);
+				} else {
+					tag.chars = tag.chars.replace(/\n|\r/g, "");
+					tag.chars = tag.chars.trim();
+				}
 			}
 		});
+
 		return fluidNode;
 	}
 

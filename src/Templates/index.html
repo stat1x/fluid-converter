@@ -21,7 +21,7 @@
 				<div class="example-wrapper">
 					<pre><code class="html pull-left">&ltf:myTag myAttr1="myAttrVal" myAttr2="{obj.prop}"/></code></pre>
 					<pre><code class="html pull-left">=></code></pre>
-					<pre><code class="js pull-left">{f:myTag(myAttr1: 'myAttrVal', myAttr2: '{obj.prop}')}</code></pre>
+					<pre><code class="css pull-left">{f:myTag(myAttr1: 'myAttrVal', myAttr2: '{obj.prop}')}</code></pre>
 					<div class="clearfix"></div>
 				</div>
 			</div>
@@ -31,37 +31,19 @@
 					<textarea class="form-control form-control-lg fluid-node-to-convert" id="fluid-node-to-convert" rows="5"
 						   placeholder="Enter the fluid tag you want to convert here"></textarea>
 					<button type="submit" class="btn btn-primary btn-lg" id="submit-conversion" disabled>Convert</button>
+					<p id="fluid-node-error" class="form-control-feedback fluid-node-error"></p>
+					<small id="fluid-example" class="form-text text-muted"></small>
 				</div>
-				<p id="fluid-node-error" class="fluid-node-error"></p>
 			</form>
 		</div>
 	</div>
 </header>
 
-<div class="container">
+<div class="container-fluid">
 	<div class="spacer">
 		<div class="text-xs-center">
 			<pre id="conversion-result"></pre>
 		</div>
-		<!--<h5>Conversion history</h5>-->
-		<!--<div class="list-group conversion-history">-->
-			<!--<div class="list-group-item">-->
-				<!--<h4 class="list-group-item-text">Second List Group Item Heading</h4>-->
-				<!--<p class="list-group-item-text">List Group Item Text</p>-->
-			<!--</div>-->
-			<!--<div class="list-group-item">-->
-				<!--<h4 class="list-group-item-text">Second List Group Item Heading</h4>-->
-				<!--<p class="list-group-item-text">List Group Item Text</p>-->
-			<!--</div>-->
-			<!--<div class="list-group-item">-->
-				<!--<h4 class="list-group-item-heading">Third List Group Item Heading</h4>-->
-				<!--<p class="list-group-item-text">List Group Item Text</p>-->
-			<!--</div>-->
-			<!--<div class="list-group-item">-->
-				<!--<h4 class="list-group-item-heading">Third List Group Item Heading</h4>-->
-				<!--<p class="list-group-item-text">List Group Item Text</p>-->
-			<!--</div>-->
-		<!--</div>-->
 	</div>
 </div>
 

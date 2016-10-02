@@ -15728,6 +15728,7 @@ var Application = function (_AbstractApplication) {
 		_this.fluidNodeToConvert = $('#fluid-node-to-convert');
 		_this.submitConversion = $('#submit-conversion');
 		_this.fluidNodeError = $('#fluid-node-error');
+		_this.fluidExample = $('#fluid-example');
 		return _this;
 	}
 
@@ -15776,13 +15777,15 @@ var Application = function (_AbstractApplication) {
 			this.fluidNodeToConvert.on('input change', function () {
 				if (_this2.fluidNodeToConvert.val() === '') {
 					_this2.submitConversion.attr('disabled', true);
-					_this2.fluidNodeError.empty();
+					_this2.resetForm();
 				} else if (!_Utilities2.default.isFluidNode(_this2.fluidNodeToConvert.val())) {
 					_this2.submitConversion.attr('disabled', true);
+					_this2.fluidNodeToConvert.addClass('form-control-danger').parent().addClass('has-danger');
 					_this2.fluidNodeError.html('This is not a valid fluid node');
+					_this2.fluidExample.text('A fluid node should look like this : <myNamespace:myViewhelper myAttr="myVal"/>');
 				} else {
 					_this2.submitConversion.removeAttr('disabled');
-					_this2.fluidNodeError.empty();
+					_this2.resetForm();
 				}
 			});
 
@@ -15792,7 +15795,7 @@ var Application = function (_AbstractApplication) {
 				var fluidNode = HTML5Tokenizer.tokenize(_this2.fluidNodeToConvert.val());
 				var convertionResult = _Utilities2.default.convertFluidNode(_Utilities2.default.sanitizeFluidNode(fluidNode));
 				if (convertionResult !== '') {
-					var newBlock = $('<code class="js">' + convertionResult + '</code>');
+					var newBlock = $('<code class="css">' + convertionResult + '</code>');
 					_this2.conversionResult.append(newBlock);
 				}
 				_this2.initializeHljs();
@@ -15807,6 +15810,18 @@ var Application = function (_AbstractApplication) {
 		key: "clearOutput",
 		value: function clearOutput() {
 			this.conversionResult.empty();
+		}
+
+		/**
+   * Resets the form
+   */
+
+	}, {
+		key: "resetForm",
+		value: function resetForm() {
+			this.fluidNodeToConvert.removeClass('form-control-danger').parent().removeClass('has-danger');
+			this.fluidNodeError.empty();
+			this.fluidExample.empty();
 		}
 	}]);
 
@@ -15892,10 +15907,16 @@ var Utilities = function () {
 		key: 'sanitizeFluidNode',
 		value: function sanitizeFluidNode(fluidNode) {
 			fluidNode.forEach(function (tag, index) {
-				if (/\r|\n/.exec(tag.chars) || /\s+/g.exec(tag.chars)) {
-					fluidNode.splice(index, 1);
+				if (tag.chars) {
+					if (!tag.chars.match(/[a-z]/i) && (/\r|\n/.exec(tag.chars) || /\s+/g.exec(tag.chars))) {
+						fluidNode.splice(index, 1);
+					} else {
+						tag.chars = tag.chars.replace(/\n|\r/g, "");
+						tag.chars = tag.chars.trim();
+					}
 				}
 			});
+
 			return fluidNode;
 		}
 
