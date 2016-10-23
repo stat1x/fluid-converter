@@ -7,5 +7,5 @@ gulp.task('template', () => {
 		.pipe(nunjucksRender({
 			path: [config.srcPath + 'Templates/']
 		}))
-		.pipe(gulp.dest(config.distPath + 'Templates/'));
+		.pipe(gulp.dest(config.distPath));
 });

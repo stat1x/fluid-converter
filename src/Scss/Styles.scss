@@ -9,7 +9,8 @@ body {
   padding-top: 3.2rem;
 }
 
-pre, .hljs {
+pre,
+.hljs {
   @include media-breakpoint-up(sm) {
     display: inline;
   }
@@ -23,6 +24,7 @@ pre, .hljs {
   background: rgba(55, 58, 60, .85);
   margin-right: 6px;
   padding-top: 8px;
+
   @include media-breakpoint-up(sm) {
     margin-top: 10px;
   }
