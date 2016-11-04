@@ -36,8 +36,9 @@ pre,
 .hljs-type,
 .hljs-template-variable,
 .hljs-attribute,
-.hljs-link {
-  color: #64a;
+.hljs-link,
+.hljs-name {
+  color: #428bca;
 }
 
 .conversion-history {
@@ -46,7 +47,8 @@ pre,
 }
 
 .site-header {
-  background: url('../Images/header-bg.jpg') no-repeat 0 -680px;
+  background: url('../Images/header-bg.jpg') no-repeat 0 -520px;
+  background-size: cover;
   color: #fff;
   position: relative;
 
