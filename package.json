@@ -1,7 +1,7 @@
 {
   "name": "src",
   "version": "1.0.0",
-  "description": "Bootstrap starter package",
+  "description": "Convert fluid nodes to inline notation",
   "main": "gulpfile.js",
   "dependencies": {
     "babel-polyfill": "^6.9.1",
@@ -53,6 +53,6 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://r1j@bitbucket.org/r1j/bootstrap-starter-package.git"
+    "url": "https://github.com/jeremieroulin/fluid-converter"
   }
 }

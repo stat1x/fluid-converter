@@ -1,20 +1,6 @@
 {
-  "name": "fluid-converter",
-  "scripts": {
-  },
-  "env": {
-  },
-  "formation": {
-    "web": {
-      "quantity": 1
-    }
-  },
-  "addons": [
-
-  ],
-  "buildpacks": [
-    {
-      "url": "heroku/nodejs"
-    }
-  ]
+    "name": "Fluid converter",
+    "description": "Convert fluid nodes to inline notation",
+    "repository": "https://github.com/jeremieroulin/fluid-converter",
+    "addons": []
 }

@@ -15721,7 +15721,7 @@ var Application = function (_AbstractApplication) {
 	function Application() {
 		_classCallCheck(this, Application);
 
-		var _this = _possibleConstructorReturn(this, (Application.__proto__ || Object.getPrototypeOf(Application)).call(this));
+		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Application).call(this));
 
 		_this.conversionForm = $('#conversion-form');
 		_this.conversionResult = $('#conversion-result');
