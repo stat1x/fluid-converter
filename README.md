@@ -1,5 +1,5 @@
-# FluidConverter #
-Convert Fluid tags into inline notation.
+# FluidConverter [![Build Status](https://travis-ci.org/jeremieroulin/fluid-converter.svg?branch=master)](https://travis-ci.org/jeremieroulin/fluid-converter)
+Convert Fluid tags into inline notation. 
 
 ## What does it do? ##
 This tool can convert fluid tags ```<f:myTag myAttr="myAttrVal"/>``` to its inline notation ```{f:myTag(myAttr: 'myAttrVal')}```. 
