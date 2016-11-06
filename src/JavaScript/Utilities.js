@@ -70,11 +70,18 @@ export default class Utilities {
 					inline = '{' + viewHelperName + '(';
 				}
 				attrs.forEach((attr, index) => {
-					inline += attr[0] + ': \'' + attr[1];
-					if (index < attrs.length - 1) {
-						inline += '\', ';
+					if(/^({.*})/.test(attr[1]) === false) {
+						inline += attr[0] + ': \'' + attr[1];
+						if (index < attrs.length - 1) {
+							inline += '\', ';
+						} else {
+							inline += '\'';
+						}
 					} else {
-						inline += '\'';
+						inline += attr[0] + ': ' + '<span class="hljs-string">' + attr[1].replace('{', '').replace('}', '') + '</span>';
+						if (index < attrs.length - 1) {
+							inline += ', ';
+						}
 					}
 				});
 				if (viewHelperName === 'f:if' && fluidNodeToConvert[1]) {

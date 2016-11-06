@@ -15721,7 +15721,7 @@ var Application = function (_AbstractApplication) {
 	function Application() {
 		_classCallCheck(this, Application);
 
-		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Application).call(this));
+		var _this = _possibleConstructorReturn(this, (Application.__proto__ || Object.getPrototypeOf(Application)).call(this));
 
 		_this.conversionForm = $('#conversion-form');
 		_this.conversionResult = $('#conversion-result');
@@ -15942,11 +15942,18 @@ var Utilities = function () {
 						inline = '{' + viewHelperName + '(';
 					}
 					attrs.forEach(function (attr, index) {
-						inline += attr[0] + ': \'' + attr[1];
-						if (index < attrs.length - 1) {
-							inline += '\', ';
+						if (/^({.*})/.test(attr[1]) === false) {
+							inline += attr[0] + ': \'' + attr[1];
+							if (index < attrs.length - 1) {
+								inline += '\', ';
+							} else {
+								inline += '\'';
+							}
 						} else {
-							inline += '\'';
+							inline += attr[0] + ': ' + '<span class="hljs-string">' + attr[1].replace('{', '').replace('}', '') + '</span>';
+							if (index < attrs.length - 1) {
+								inline += ', ';
+							}
 						}
 					});
 					if (viewHelperName === 'f:if' && fluidNodeToConvert[1]) {
