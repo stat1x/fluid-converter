@@ -45,10 +45,10 @@
     "npm": "^3.10.2",
     "systemjs": "^0.19.31",
     "browser-sync": "^2.12.5",
+    "browserify": "^13.0.1",
     "simple-html-tokenizer": "^0.4.1"
   },
   "devDependencies": {
-    "browserify": "^13.0.1"
   },
   "scripts": {
     "start": "gulp prod"
