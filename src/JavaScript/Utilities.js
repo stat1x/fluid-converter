@@ -70,6 +70,11 @@ export default class Utilities {
 					inline = '{' + viewHelperName + '(';
 				}
 				attrs.forEach((attr, index) => {
+					// Check if the attribute value contains an other fluid node
+					if(/^((.*){[a-zA-Z]+:[a-zA-Z]+(.+?)}(.*))/.test(attr[1]) === true) {
+						attr[1] = attr[1].replace(/'/g, "\\'");
+					}
+					// Check if the attribute value is a property. If it is, remove the useless {...}
 					if(/^({.*})/.test(attr[1]) === false) {
 						inline += attr[0] + ': \'' + attr[1];
 						if (index < attrs.length - 1) {
