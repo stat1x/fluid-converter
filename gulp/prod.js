@@ -4,7 +4,8 @@ import config from '../gulp.config';
 
 gulp.task('serve', () => {
     browser.init({
-        server: config.distPath
+        server: config.distPath,
+        open: false
     });
 });
 
