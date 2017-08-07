@@ -1,5 +1,6 @@
 node_modules
 *.zip
+.idea
 .DS_Store
 .DS_Store?
 ._*
@@ -7,3 +8,4 @@ node_modules
 .Trashes
 ehthumbs.db
 Thumbs.db
+dist

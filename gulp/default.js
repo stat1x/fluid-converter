@@ -11,12 +11,10 @@ gulp.task('serve', () => {
 gulp.task('watch', () => {
 	gulp.watch(config.src.stylesheets + '**/*.scss', ['sass', browser.reload]);
 	gulp.watch(config.src.javascripts + '**/*.js', ['javascript', browser.reload]);
-	gulp.watch(config.src.vendors + '**/*', ['vendors', browser.reload]);
-	gulp.watch(config.src.fonts + '**/*', ['fonts', browser.reload]);
 	gulp.watch(config.src.images + '**/*', ['images', browser.reload]);
 	gulp.watch(config.src.templates + '**/*.html', ['template', browser.reload]);
 });
 
 gulp.task('default', ['watch', 'serve'], () => {
-	gulp.start('javascript', 'images', 'template', 'sass', 'vendors', 'fonts');
+	gulp.start('javascript', 'images', 'template', 'sass');
 });

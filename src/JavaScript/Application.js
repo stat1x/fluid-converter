@@ -1,6 +1,6 @@
 import AbstractApplication from "./AbstractApplication";
 import Utilities from "./Utilities";
-import * as HTML5Tokenizer from "../Vendors/simple-html-tokenizer/lib/simple-html-tokenizer/index";
+import * as HTML5Tokenizer from "simple-html-tokenizer";
 import hljs from "highlight.js";
 
 export default class Application extends AbstractApplication {
