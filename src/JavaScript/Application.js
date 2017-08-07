@@ -2,6 +2,7 @@ import AbstractApplication from "./AbstractApplication";
 import Utilities from "./Utilities";
 import * as HTML5Tokenizer from "simple-html-tokenizer";
 import hljs from "highlight.js";
+import $ from "jquery";
 
 export default class Application extends AbstractApplication {
 

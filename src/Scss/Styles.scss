@@ -1,13 +1,10 @@
 @import 'Partials/variables';
 @import 'Partials/mixins';
 @import 'Partials/functions';
-@import '../Vendors/bootstrap/scss/bootstrap';
-@import '../Vendors/font-awesome/scss/font-awesome';
+@import '../../node_modules/bootstrap/scss/bootstrap';
+@import '../../node_modules/highlight.js/styles/arta';
+//@import '../Vendors/font-awesome/scss/font-awesome';
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,900italic,900,700,700italic,400italic,100);
-
-body {
-  padding-top: 3.2rem;
-}
 
 pre,
 .hljs {
