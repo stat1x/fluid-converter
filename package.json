@@ -44,10 +44,10 @@
     "jshint": "^2.9.2",
     "npm": "^3.10.2",
     "systemjs": "^0.19.31",
+    "browser-sync": "^2.12.5",
     "simple-html-tokenizer": "^0.4.1"
   },
   "devDependencies": {
-    "browser-sync": "^2.12.5",
     "browserify": "^13.0.1"
   },
   "scripts": {
