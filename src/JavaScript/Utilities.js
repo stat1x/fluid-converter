@@ -59,6 +59,7 @@ export default class Utilities {
 	 */
 	static convertFluidNode(fluidNodeToConvert) {
 		let inline = '';
+		let isComparaison;
 		let attrs = fluidNodeToConvert[0].attributes;
 
 		if (attrs) {
@@ -75,12 +76,18 @@ export default class Utilities {
 						attr[1] = attr[1].replace(/'/g, "\\'");
 					}
 					// Check if the attribute value is a property. If it is, remove the useless {...}
-					if(/^({.*})/.test(attr[1]) === false) {
+					isComparaison = /^((.*) == (.*))/.test(attr[1]);
+					if(/^({.*})/.test(attr[1]) === false && !isComparaison) {
 						inline += attr[0] + ': \'' + attr[1];
 						if (index < attrs.length - 1) {
 							inline += '\', ';
 						} else {
 							inline += '\'';
+						}
+					} else if (isComparaison) {
+						inline += attr[0] + ': ' + '\'<span class="hljs-string">' + attr[1] + '</span>\'';
+						if (index < attrs.length - 1) {
+							inline += ', ';
 						}
 					} else {
 						inline += attr[0] + ': ' + '<span class="hljs-string">' + attr[1].replace('{', '').replace('}', '') + '</span>';
