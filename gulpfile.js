@@ -1,2 +1,2 @@
-import requireDir from 'require-dir';
+requireDir = require('require-dir');
 requireDir('./gulp');
