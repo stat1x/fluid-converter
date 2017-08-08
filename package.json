@@ -53,6 +53,7 @@
     "simple-html-tokenizer": "^0.4.1"
   },
   "scripts": {
+    "build": "gulp heroku:production"
   },
   "author": "",
   "license": "ISC",
