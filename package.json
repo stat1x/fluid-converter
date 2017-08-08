@@ -4,13 +4,6 @@
   "description": "Convert fluid nodes to inline notation",
   "main": "gulpfile.js",
   "dependencies": {
-    "bootstrap": "^4.0.0-alpha.6",
-    "express": "^4.15.4",
-    "gzippo": "^0.2.0",
-    "highlight.js": "^9.12.0",
-    "jquery": "^3.2.1"
-  },
-  "devDependencies": {
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^2.3.1",
     "gulp-babel": "^6.1.2",
@@ -50,7 +43,14 @@
     "systemjs": "^0.19.31",
     "browser-sync": "^2.12.5",
     "browserify": "^13.0.1",
+    "bootstrap": "^4.0.0-alpha.6",
+    "express": "^4.15.4",
+    "gzippo": "^0.2.0",
+    "highlight.js": "^9.12.0",
+    "jquery": "^3.2.1",
     "simple-html-tokenizer": "^0.4.1"
+  },
+  "devDependencies": {
   },
   "scripts": {
     "start": "node web.js",
