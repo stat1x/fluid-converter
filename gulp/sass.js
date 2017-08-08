@@ -21,10 +21,5 @@ gulp.task('sass', () => {
 		}))
 		.pipe(cleanCss())
 		.pipe(sourceMaps.write())
-		.pipe(gulp.dest(config.dist.stylesheets))
-		.on('finish', () => {
-			gulp.src(config.src.stylesheets + '**/*.scss').pipe(scssLint({
-				config: '.scss-lint.yml'
-			}))
-		});
+		.pipe(gulp.dest(config.dist.stylesheets));
 });
