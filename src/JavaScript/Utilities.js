@@ -97,9 +97,9 @@ export default class Utilities {
 					}
 				});
 				if (viewHelperName === 'f:if' && fluidNodeToConvert[1]) {
-					inline += ', then: \'' + fluidNodeToConvert[2].chars + '\', ';
-					if (fluidNodeToConvert[4]) {
-						inline += 'else: \'' + fluidNodeToConvert[5].chars + '\'';
+					inline += ', then: \'' + fluidNodeToConvert[2].chars + '\'';
+					if (fluidNodeToConvert[4] && (fluidNodeToConvert[5].chars)) {
+						inline += ', ' + 'else: \'' + fluidNodeToConvert[5].chars + '\'';
 					}
 				}
 				inline += ')}';
