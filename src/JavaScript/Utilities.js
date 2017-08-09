@@ -65,7 +65,7 @@ export default class Utilities {
 		if (attrs) {
 			let viewHelperName = Utilities.getFluidViewHelperName(fluidNodeToConvert);
 			if (viewHelperName) {
-				if (fluidNodeToConvert[1] && fluidNodeToConvert[1].type === 'Chars') {
+				if (fluidNodeToConvert[1] && fluidNodeToConvert[1].type === 'Chars' && fluidNodeToConvert[0].tagName !== 'f:if') {
 					inline = '{' + fluidNodeToConvert[1].chars.replace('{', '').replace('}', '') + ' -> ' + viewHelperName + '(';
 				} else {
 					inline = '{' + viewHelperName + '(';
@@ -108,4 +108,14 @@ export default class Utilities {
 
 		return inline;
 	}
+
+    static printNode(node) {
+		let line = '';
+        if (node.chars) {
+            line += node.chars;
+        } else {
+        	line += (node.type === 'EndTag' ? '&lt;/' : '&lt;') + node.tagName + '&gt;';
+		}
+        return line
+    }
 }
